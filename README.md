@@ -6,7 +6,7 @@ Dimensions of this neural network can be changed dynamically. For XOR problem it
 
 # Calculations
 Activation function of every neuron in the neural network is sigmoid, where A
-$$ A_i(Z_i) = 1 / (1 + e^-Z_i)
+$$\A_i(Z_i) = 1 / (1 + e^-Z_i)
 
 The cost function used here is slightly different from MSE (Mean Square Error):
 
