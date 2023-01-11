@@ -3,7 +3,9 @@ A neural network written in Python to solve XOR problem.
 
 # Architecture
 Dimensions of this neural network can be changed dynamically. For XOR problem it is sufficcient to have 2 neurons in the input layer, 10 neurons in the hidden layer and 2 neurons in the output layer (classes '0' and '1'). Dimensions are adjusted by this line of code:
-
+```
+NN_dimensions = [2, 10, 10, 2]
+```
 In this example number of iterations is fixed, the learning rate is fixed as well. My example should display the essence of neural networks with hidden layers, that is math.
 # Notations used in formulas for gradient calculation:
 
@@ -82,5 +84,9 @@ grad = \frac{\partial{C}}{\partial{b_{i}^{(n)}}} = (y_i - \hat{y_i}) * (\hat{y_i
 ```
 That's it! Having found the gradient for each weight in the ouptut layer, we can use it to adjust the weights:
 ```math
-W_{ij}^{(n)} := W_{ij}^{(n)} - grad * learning_rate
+W_{ij}^{(n)} := W_{ij}^{(n)} - grad * learningRate
 ```
+Now the harder part is calculating the gradient for hidden layers. Luckily, there is a pattern: derivatives repeat themselves, hence calculating and saving derivatives as we move from the outer layer (BACK propagation) to 'front' enables us to reuse the values.
+```math
+\frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{\hat{y_i}^{(n+1)}}} * \frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n+1)}}}} * \frac{\partial{z_{i}^{(n+1)}}}{\partial{{a_i^{(n)}}}} * \frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} 
+```math
