@@ -51,9 +51,9 @@ a_i = \frac{1}{1 + e^{(-z_i)}}
 The cost function used here is slightly different from MSE (Mean Square Error). Instead of taking the mean of all square errors, we take 1/2. This is done in order for the derivative to be a bit simplier.
 MSE (or _C_)is calculated as follows:
 ```math
-C = \frac{1}{2}*\sum_{k=1}^M(\hat{y_i} - y_i)^2
+C = \frac{1}{2}*\sum_{k=1}^M(y_i - \hat{y_i})^2
 ```
-## Derivatives of cost function to necessary variables - calculating gradient
+## Derivatives of cost function - calculating gradient
 Now onto derivatives. In order to calculate gradient for each weight we have to calculate the partial derivative of cost with respect to that weight. Therefore, we want to find:
 ```math
 \frac{\partial{C}}{\partial{W_{ij}}^{(n)}}
@@ -64,5 +64,6 @@ When calculating for the last layer _n_, following chain rule we can expand that
 ```
 In order to do that, let's first derive expressions for each derivative:
 ```math
-\frac{\partial{C}}{\partial{\hat{y_i}}} = (
+\frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}} = y_i - \hat{y_i}
+\frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}} = 
 ```
