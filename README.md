@@ -24,7 +24,7 @@ a_{i}^{(n)}
 ```
 # Calculations
 It is necessary to calculate the sum values _z_ of every neuron in every hidden layer.
-We use the formula as follows:
+We use the formula as follows (_M_ - number of neurons in the previous layer):
 ```math
 z_{ij}^{(n)} = b_{i}^{(n)} + \sum_{k=1}^{M}(W_{ik}^{(n)}*a_k^{(n-1)})
 ```
