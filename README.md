@@ -52,6 +52,6 @@ MSE (or _C_)is calculated as follows:
 C = \frac{1}{2}*\sum_{k=1}^M(\hat{y_i} - y_i)^2
 ```
 Now onto derivatives. In order to calculate gradient for each weight we have to calculate the partial derivative of cost with respect to that weight. In order to do that, let's first derive general expressions for:
-1. Partial derivative of cost function with respect to _z_ in the last layer
-2. Partial derivative of _a_ with the respect to _z_i_
-3. Partial derivative of _z_ with respect to _w_
+1. Partial derivative of cost function with respect to _z<sub>i</sub>_ in the last layer
+2. Partial derivative of _a<sub>i</sub><sup>(n)</sup>_ with the respect to _z<sub>i</sub><sup>(n)</sup>_
+3. Partial derivative of _z<sub>i</sub><sup>(n)</sup>_ with respect to _w<sub>ij</sub><sup>(n)</sup>_
