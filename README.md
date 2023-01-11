@@ -90,3 +90,15 @@ Now the harder part is calculating the gradient for hidden layers. Luckily, ther
 ```math
 \frac{\partial{C}}{\partial{{z_{i}^{(n)}}} = \sum_{k=1}^{M} \frac{\partial{C}}{\partial{\hat{y_k}^{(n+1)}}} * \frac{\partial{a_k^{(n)}}}{\partial{a_k^{(n+1)}}} * \frac{\partial{a_k^{(n+1)}}}{\partial{{a_i^{(n)}}}} * \frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} 
 ```
+```math
+\frac{\partial{C}}{\partial{\hat{y_k}^{(n+1)}}}
+```
+```math
+\frac{\partial{a_k^{(n)}}}{\partial{a_k^{(n+1)}}}
+```
+```math
+\frac{\partial{a_k^{(n+1)}}}{\partial{{a_i^{(n)}}}}
+```
+```math
+\frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} 
+```
