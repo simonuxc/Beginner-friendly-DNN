@@ -22,6 +22,10 @@ The activation value _a_ of a neuron, where _(n)_ - layer number, _i_ - neuron n
 ```math
 a_{i}^{(n)}
 ```
+The cost function of whole neural network:
+```math
+C
+```
 # Calculations
 It is necessary to calculate the sum values _z_ of every neuron in every hidden layer.
 We use the formula as follows (_M_ - number of neurons in the previous layer):
