@@ -4,9 +4,14 @@ A neural network written in Python to solve XOR problem.
 # Architecture
 Dimensions of this neural network can be changed dynamically. For XOR problem it is sufficcient to have 2 neurons in the input layer, 10 neurons in the hidden layer and 2 neurons in the output layer (classes '0' and '1'). Dimensions are adjusted by this line of code:
 ```
+# two input neurons, one hidden layer with 10 neurons, last layer with 2 output neurons
 NN_dimensions = [2, 10, 2]
+
+# a - number of inputs, Ln - number of neurons in hidden layers
+NN_dimensions = [a, L1, L2, ..., Ln]
 ```
-In this example number of iterations is fixed, the learning rate is fixed as well. This project was made with one purpose: delving into the essence of neural networks, that is, math.
+
+In this code example number of iterations is fixed, the learning rate is fixed as well. This project was made with one purpose: delving into the essence of neural networks, that is, math.
 # Notations used in formulas for gradient calculation:
 
 Weight notation, where _(n)_ - layer index, _i_ - neuron index, _j_ - weight index:
