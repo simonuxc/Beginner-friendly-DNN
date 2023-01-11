@@ -31,7 +31,7 @@ z_{i}^{(n)} = b_{i}^{(n)} + \sum_{k=1}^{M}(W_{ik}^{(n)}*a_k^{(n-1)})
 Activation function of every neuron in this neural network is sigmoid.
 It is calculated as follows:
 ```math
-a_i = 1 / (1 + e^z_i)
+a_i = \frac{1}{1 + e^{(-z_i)}
 ```
 
 The cost function used here is slightly different from MSE (Mean Square Error):
