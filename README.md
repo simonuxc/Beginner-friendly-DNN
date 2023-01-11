@@ -72,11 +72,15 @@ In order to do that, let's first find each derivative:
 ```math
 \frac{\partial{z_{i}^{(n)}}}{\partial{{W_{(ij)}^{(n)}}}} = a_j^{(n-1)}
 ```
-Putting it all back together, we get:
+Putting it all back together, we get the full gradient:
 ```math
-\frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = (y_i - \hat{y_i}) * (\hat{y_i} * (1 - \hat{y_i})) * a_j^{(n-1)}
+grad = \frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = (y_i - \hat{y_i}) * (\hat{y_i} * (1 - \hat{y_i})) * a_j^{(n-1)}
 ```
 If we want to adjust the bias, then the partial derivative of sum with respect to bias is 1; we get:
 ```math
-\frac{\partial{C}}{\partial{b_{i}^{(n)}}} = (y_i - \hat{y_i}) * (\hat{y_i} * (1 - \hat{y_i}))
+grad = \frac{\partial{C}}{\partial{b_{i}^{(n)}}} = (y_i - \hat{y_i}) * (\hat{y_i} * (1 - \hat{y_i}))
+```
+That's it! Having found the gradient for each weight in the ouptut layer, we can use it to adjust the weights:
+```
+W_{ij}^{(n)} := W_{ij}^{(n)} - grad * learning_rate
 ```
