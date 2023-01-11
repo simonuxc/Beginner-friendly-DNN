@@ -81,6 +81,6 @@ If we want to adjust the bias, then the partial derivative of sum with respect t
 grad = \frac{\partial{C}}{\partial{b_{i}^{(n)}}} = (y_i - \hat{y_i}) * (\hat{y_i} * (1 - \hat{y_i}))
 ```
 That's it! Having found the gradient for each weight in the ouptut layer, we can use it to adjust the weights:
-```
+```math
 W_{ij}^{(n)} := W_{ij}^{(n)} - grad * learning_rate
 ```
