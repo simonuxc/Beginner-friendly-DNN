@@ -55,7 +55,7 @@ Now onto derivatives. In order to calculate gradient for each weight we have to 
 ```math
 \frac{\partial{C}}{\partial{W_{ij}}^{(n)}}
 ```
-When _n_ is the last layer, following chain rule we can expand that derivative to:
+When calculating for the last layer, following chain rule we can expand that derivative to (all sums and activations are that of the last layer):
 ```math
 \frac{\partial{C}}{\partial{W_{ij}}} = \frac{\partial{C}}{\partial{\hat{y_i}}} * \frac{\partial{\hat{y_i}}}{\partial{{z_{i}}}}  * \frac{\partial{z_{i}}}{\partial{{W_{(ij)}}}}
 ```
