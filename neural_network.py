@@ -38,8 +38,8 @@ def se(y_hat, y_train):
 x_train = [[0, 0], [1, 0], [0, 1], [1, 1]]
 y_train = [[1, 0], [0, 1], [0, 1], [1, 0]]
 
-NN_dimensions = [2, 10, 10, 2]
-iterations = 40000
+NN_dimensions = [2, 10, 2]
+iterations = 10000
 learning_rate = 0.1
 # prepare square errors array for each training scenario
 se_arr = []
