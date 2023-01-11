@@ -18,6 +18,7 @@ The activation value a of a neuron, where (n) - layer number, i - neuron number:
 ```math
 a_{i}^{(n)}
 ```
+# Calculations
 The sum z for each neuron is calculated by sum formula.
 If we wish to calculate z<sub>ij</sub><sup>(n)</sup>, we use the sum formula:
 ```math
