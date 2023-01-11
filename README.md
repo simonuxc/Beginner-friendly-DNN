@@ -58,11 +58,11 @@ Now onto derivatives. In order to calculate gradient for each weight we have to 
 ```math
 \frac{\partial{C}}{\partial{W_{ij}}^{(n)}}
 ```
-When calculating for the last layer _n_, following chain rule we can expand that derivative to:
+If we are calculating for the last layer _n_, by following chain, previous derivative can be expanded to the following equation:
 ```math
 \frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}} * \frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}}  * \frac{\partial{z_{i}^{(n)}}}{\partial{{W_{(ij)}^{(n)}}}}
 ```
-In order to do that, let's first derive expressions for each derivative:
+In order to do that, let's first find each derivative:
 ```math
 \frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}} = y_i - \hat{y_i}
 ```
