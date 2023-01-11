@@ -86,13 +86,35 @@ That's it! Having found the gradient for each weight in the ouptut layer, we can
 ```math
 W_{ij}^{(n)} := W_{ij}^{(n)} - grad * learningRate
 ```
-Now the harder part is calculating the gradient for hidden layers. Luckily, there is a pattern: derivatives repeat themselves, hence calculating and saving derivatives as we move from the outer layer (BACK propagation) to 'front' enables us to reuse the values.
+Now the harder part is calculating the gradient for hidden layers. Luckily, there is a pattern: derivatives repeat themselves, hence calculating and saving derivatives as we move from the outer layer (BACK propagation) to 'front' enables us to reuse the values (NOTE: we take the derivative with respect to sum, not with respect to weight. We do this so we can save the partial derivative for calculating derivatives at different level. _M_ - number of neurons in the second (n+1) layer).
 ```math
-\frac{\partial{C}}{\partial{{z_{i}^{(n)}}} = \sum_{k=1}^{M}\frac{\partial{C}}{\partial{\hat{y_k}^{(n+1)}}} * \frac{\partial{a_k^{(n)}}}{\partial{a_k^{(n+1)}}} * \frac{\partial{a_k^{(n+1)}}}{\partial{{a_i^{(n)}}}} * \frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} 
+\frac{\partial{C}}{\partial{{z_i^{(n)}}}} = \sum_{k=1}^{M}\frac{\partial{C}}{\partial{a_k^{(n+1)}}} * \frac{\partial{a_k^{(n + 1)}}}{\partial{z_k^{(n+1)}}} * \frac{\partial{z_k^{(n+1)}}}{\partial{{a_i^{(n)}}}} * \frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} 
+```
+Note how the last derivative is constant in terms of _k_ (that value is the same for every multipliciation in sum function), so we can put it before sum notation. Also note, that we have two partial derivatives that can be rewriten into one:
+```math
+\frac{\partial{C}}{\partial{a_k^{(n+1)}}} * \frac{\partial{a_k^{(n + 1)}}}{\partial{z_k^{(n+1)}}} = \frac{\partial{C}}{\partial{z_k^{(n+1)}}}
+```
+We get:
+```math
+\frac{\partial{C}}{\partial{{z_i^{(n)}}}} = \frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} * \sum_{k=1}^{M}\frac{\partial{C}}{\partial{z_k^{(n+1)}}} * \frac{\partial{z_k^{(n+1)}}}{\partial{{a_i^{(n)}}}}
 ```
 ```math
-\frac{\partial{C}}{\partial{{z_i^{(n)}}}
+\frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)})
 ```
 ```math
-\sum_{k=1}^{M}
+\frac{\partial{z_k^{(n+1)}}}{\partial{{a_i^{(n)}}}} = W_{ji}^{(n+1)}
+```
+```math
+\frac{\partial{C}}{\partial{{z_i^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)}) * \sum_{k=1}^{M}\frac{\partial{C}}{\partial{z_k^{(n+1)}}} * W_{ji}^{(n+1)}
+```
+Notice how for the cost derivative with respect to sum in layer n we have to use cost derivative with respect to sum in layer (n+1). That's the tricky part - saving the derivatives. If we go back to derivative in the last (output) layer we see, that we have calculated full gradient for each weight. But from the general formula we also see, that only cost derivative with respect to sum is needed.
+```math
+\frac{\partial{C}}{\partial{{z_{i}^{(n)}}}} = \frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}}  * \frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}}
+```
+```math
+\frac{\partial{C}}{\partial{{z_{i}^{(n)}}}} = (y_i - \hat{y_i}) * \hat{y_i} * (1 - \hat{y_i})
+```
+Now we have everything we need for our gradient descent algorithm. In the code, we have to save these derivatives in an array. Once they are calculated, weights can be adjusted by this final formula (note, that derivative for the output layer has to be calculated separately, but all others follow the same convention):
+```math
+\frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{{z_{i}^{(n)}}}} * a_j^{(n-1)}
 ```
