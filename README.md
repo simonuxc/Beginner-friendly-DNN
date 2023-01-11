@@ -6,24 +6,24 @@ Dimensions of this neural network can be changed dynamically. For XOR problem it
 
 # Notations used in formulas for gradient calculation:
 
-Weight notation, where (n) - layer number, i - neuron number, j - weight number:
+Weight notation, where _(n)_ - layer number, _i_ - neuron number, _j_ - weight number:
 ```math
 W_{ij}^{(n)}
 ```
-Bias value, where (n) - layer number, i - neuron number:
+Bias value, where _(n)_ - layer number, _i_ - neuron number:
 ```math
 b_{i}^{(n)}
 ```
-The sum value z of a neuron, where (n) - layer number, i - neuron number:
+The sum value _z_ of a neuron, where _(n)_ - layer number, _i_ - neuron number:
 ```math
 z_{i}^{(n)}
 ```
-The activation value a of a neuron, where (n) - layer number, i - neuron number:
+The activation value _a_ of a neuron, where _(n)_ - layer number, _i_ - neuron number:
 ```math
 a_{i}^{(n)}
 ```
 # Calculations
-It is necessary to calculate the sum values z of every neuron in every hidden layer.
+It is necessary to calculate the sum values _z_ of every neuron in every hidden layer.
 We use the formula as follows:
 ```math
 z_{ij}^{(n)} = b_{i}^{(n)} + \sum_{k=1}^{M}(W_{ik}^{(n)}*X_k^{(n-1)})
