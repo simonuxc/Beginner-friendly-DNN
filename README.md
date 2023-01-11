@@ -2,7 +2,7 @@
 A neural network written in Python to solve XOR problem.
 
 # Architecture
-Dimensions of this neural network can be changed dynamically. For XOR problem it is sufficcient to have 2 neurons in the input layer, 10 neurons in the hidden layer and 2 neurons in the output layer (classes '0' and '1'). Dimensions are changed here:
+Dimensions of this neural network can be changed dynamically. For XOR problem it is sufficcient to have 2 neurons in the input layer, 10 neurons in the hidden layer and 2 neurons in the output layer (classes '0' and '1'). Dimensions are adjusted by this line of code:
 
 # Notations used in formulas for gradient calculation:
 
@@ -57,10 +57,7 @@ Now onto derivatives. In order to calculate gradient for each weight we have to 
 ```
 When calculating for the last layer, following chain rule we can expand that derivative to (all sums and activations are that of the last layer):
 ```math
-\frac{\partial{C}}{\partial{W_{ij}}} = \frac{\partial{C}}{\partial{\hat{y_i}}} * \frac{\partial{\hat{y_i}}}{\partial{{z_{i}}}}  * \frac{\partial{z_{i}}}{\partial{{W_{(ij)}}}}
-```
-```math
-
+\frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}} * \frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}}  * \frac{\partial{z_{i}^{(n)}}}{\partial{{W_{(ij)}^{(n)}}}}
 ```
 In order to do that, let's first derive expressions for each derivative:
 ## Derivation
