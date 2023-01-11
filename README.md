@@ -51,18 +51,36 @@ a_i = \frac{1}{1 + e^{(-z_i)}}
 The cost function used here is slightly different from MSE (Mean Square Error). Instead of taking the mean of all square errors, we take 1/2. This is done in order for the derivative to be a bit simplier.
 MSE (or _C_)is calculated as follows:
 ```math
-C = \frac{1}{2}*\sum_{k=1}^M(\hat{y_i} - y_i)^2
+C = \frac{1}{2}*\sum_{k=1}^M(y_i - \hat{y_i})^2
 ```
-## Derivatives of cost function to necessary variables - calculating gradient
+## Derivatives of cost function - calculating gradient
 Now onto derivatives. In order to calculate gradient for each weight we have to calculate the partial derivative of cost with respect to that weight. Therefore, we want to find:
 ```math
 \frac{\partial{C}}{\partial{W_{ij}}^{(n)}}
 ```
-When calculating for the last layer _n_, following chain rule we can expand that derivative to:
+If we are calculating for the last layer _n_, by following chain, previous derivative can be expanded to the following equation:
 ```math
 \frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}} * \frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}}  * \frac{\partial{z_{i}^{(n)}}}{\partial{{W_{(ij)}^{(n)}}}}
 ```
-In order to do that, let's first derive expressions for each derivative:
+In order to do that, let's first find each derivative:
 ```math
-\frac{\partial{C}}{\partial{\hat{y_i}}} = (
+\frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}} = y_i - \hat{y_i}
+```
+```math
+\frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}} = \hat{y_i} * (1 - \hat{y_i})
+```
+```math
+\frac{\partial{z_{i}^{(n)}}}{\partial{{W_{(ij)}^{(n)}}}} = a_j^{(n-1)}
+```
+Putting it all back together, we get the full gradient:
+```math
+grad = \frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = (y_i - \hat{y_i}) * (\hat{y_i} * (1 - \hat{y_i})) * a_j^{(n-1)}
+```
+If we want to adjust the bias, then the partial derivative of sum with respect to bias is 1; we get:
+```math
+grad = \frac{\partial{C}}{\partial{b_{i}^{(n)}}} = (y_i - \hat{y_i}) * (\hat{y_i} * (1 - \hat{y_i}))
+```
+That's it! Having found the gradient for each weight in the ouptut layer, we can use it to adjust the weights:
+```math
+W_{ij}^{(n)} := W_{ij}^{(n)} - grad * learning_rate
 ```
