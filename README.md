@@ -1,4 +1,4 @@
-# Introductory to DNN
+# Introductory-to-DNN
 A neural network written in Python to solve XOR problem.
 
 # Architecture
