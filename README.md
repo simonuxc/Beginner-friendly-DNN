@@ -22,6 +22,10 @@ The activation value _a_ of a neuron, where _(n)_ - layer number, _i_ - neuron n
 ```math
 a_{i}^{(n)}
 ```
+The predicted output for class _i_, where _i_ is the number of neuron in the last (output) layer:
+```math
+\hat{y_i} = a_i^{(last layer)} 
+```
 The cost function of whole neural network:
 ```math
 C
@@ -38,5 +42,8 @@ It is calculated as follows:
 a_i = \frac{1}{1 + e^{(-z_i)}}
 ```
 
-The cost function used here is slightly different from MSE (Mean Square Error):
-
+The cost function used here is slightly different from MSE (Mean Square Error). Instead of taking the mean of all square errors, we take 1/2. This is done in order for the derivative to be a bit simplier.
+MSE (or _C_)is calculated as follows:
+```math
+C = \frac{1}{2}*\sum_{k=1}^M()
+```
