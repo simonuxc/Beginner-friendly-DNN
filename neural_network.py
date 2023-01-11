@@ -30,15 +30,17 @@ def calculate_activations(neurons_activations, x_set, weights):
     y_hat = neurons_activations[-1]
     return y_hat
 
+# returns square error based on the predicted outputs
 def se(y_hat, y_train):
     return (y_train[0] - y_hat[0])**2 + (y_train[1] - y_hat[1])**2
+
 # training data
 x_train = [[0, 0], [1, 0], [0, 1], [1, 1]]
 y_train = [[1, 0], [0, 1], [0, 1], [1, 0]]
 
-NN_dimensions = [2, 10, 10, 10, 2]
-iterations = 100000
-step = 0.1
+NN_dimensions = [2, 10, 10, 2]
+iterations = 40000
+learning_rate = 0.1
 # prepare square errors array for each training scenario
 se_arr = []
 for i in range(len(x_train)): se_arr.append([])
@@ -64,7 +66,7 @@ for i in range(len(NN_dimensions) - 1):
 
 # create an array for keeping derivatives of neurons (dcdz, where z is the sum of current layer)
 derivatives_dcdz = []
-# the first layer doesn't need derivative to be calculated, because it has no weights
+# the first layer doesn't need derivative to be calculated, because it has no weights (nothing to adjust)
 for i in range(len(NN_dimensions) - 1):
     derivatives_dcdz.append([])
     for j in range(NN_dimensions[i + 1]):
@@ -98,8 +100,6 @@ for itr in range(iterations):
             for j in range(len(derivatives_dcdz[i])):
                 # calculate part of that derivative using derivative formula (sum of derivatives in the following layer * respective weights)
                 for k in range(len(derivatives_dcdz[i + 1])):
-                    # I believe it should be ... = ... * neurons_weights[i + 1][k][j + 1], because neurons_weights[i + 1][k][0] is bias value
-                    # for which we don't have to account in derivative, yet writing 'j + 1' gives shit answers
                     derivatives_dcdz[i][j] += derivatives_dcdz[i + 1][k] * neurons_weights[i + 1][k][j]
             # go through each derivative in layer i and 'complete' it (formula)
             for j in range(len(derivatives_dcdz[i])):
@@ -117,12 +117,12 @@ for itr in range(iterations):
                     if k == 0:
                         # in the sum formula bias is multiplied by '1', so the full gradient is just dcdz
                         grad = derivatives_dcdz[i][j] * 1
-                        neurons_weights[i][j][k] -= grad * step
+                        neurons_weights[i][j][k] -= grad * learning_rate
                     # adjust all other weights
                     else:
                         # in the sum formula wieght is multiplied by the ouput of prievious layer
                         grad = derivatives_dcdz[i][j] * neurons_activations[i][k - 1]
-                        neurons_weights[i][j][k] -= grad * step
+                        neurons_weights[i][j][k] -= grad * learning_rate
 
 for i in range(len(x_train)):
     y_hat = calculate_activations(neurons_activations, x_train[i], neurons_weights)
