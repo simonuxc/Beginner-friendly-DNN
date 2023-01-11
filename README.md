@@ -5,11 +5,15 @@ A neural network written in Python to solve XOR problem.
 Dimensions of this neural network can be changed dynamically. For XOR problem it is sufficcient to have 2 neurons in the input layer, 10 neurons in the hidden layer and 2 neurons in the output layer (classes '0' and '1'). Dimensions are changed here:
 
 # Calculations
-Notations for formulas:
+Notations used in formulas:
 
-The sum value z of a neuron, where (n) - layer number, i - neuron number, j - weight number:
+Weight notation, where (n) - layer number, i - neuron number, j - weight number:
 ```math
-z_{ij}^{(n)}
+W_{ij}^{(n)}
+```
+The sum value z of a neuron, where (n) - layer number, i - neuron number:
+```math
+z_{i}^{(n)}
 ```
 The activation value a of a neuron, where (n) - layer number, i - neuron number:
 ```math
