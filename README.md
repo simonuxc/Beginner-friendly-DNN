@@ -6,7 +6,9 @@ Dimensions of this neural network can be changed dynamically. For XOR problem it
 
 # Calculations
 Notations for formulas:
+
 The sum of input values from the last layer times current neuron weights + current neuron bias:  z<sub>ij</sub><sup>(n)</sup> ((n) - layer number, i - neuron number, j - weight number)
+
 The sum z for each neuron is calculated by sum formula.
 If we wish to calculate z<sub>ij</sub><sup>(n)</sup>, we use the sum formula:
 ```math
