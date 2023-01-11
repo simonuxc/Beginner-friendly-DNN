@@ -4,8 +4,7 @@ A neural network written in Python to solve XOR problem.
 # Architecture
 Dimensions of this neural network can be changed dynamically. For XOR problem it is sufficcient to have 2 neurons in the input layer, 10 neurons in the hidden layer and 2 neurons in the output layer (classes '0' and '1'). Dimensions are changed here:
 
-# Calculations
-Notations used in formulas:
+# Notations used in formulas for gradient calculation:
 
 Weight notation, where (n) - layer number, i - neuron number, j - weight number:
 ```math
