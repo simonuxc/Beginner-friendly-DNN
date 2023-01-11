@@ -24,7 +24,7 @@ a_{i}^{(n)}
 ```
 The predicted output for class _i_, where _i_ is the index of neuron in the last (output) layer:
 ```math
-\hat{y_i} = a_i^{(last_layer)} 
+\hat{y_i} = a_i^{(last-layer)} 
 ```
 The expected output for class _i_, where _i_ is the index of neuron in the last (output) layer:
 ```math
