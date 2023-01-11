@@ -65,5 +65,10 @@ When calculating for the last layer _n_, following chain rule we can expand that
 In order to do that, let's first derive expressions for each derivative:
 ```math
 \frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}} = y_i - \hat{y_i}
-\frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}} = 
+```
+```math
+\frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}} = \hat{y_i} * (1 - \hat{y_i})
+```
+```math
+\frac{\partial{z_{i}^{(n)}}}{\partial{{W_{(ij)}^{(n)}}}} = a_j^{(n-1)}
 ```
