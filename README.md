@@ -26,7 +26,7 @@ a_{i}^{(n)}
 It is necessary to calculate the sum values _z_ of every neuron in every hidden layer.
 We use the formula as follows:
 ```math
-z_{ij}^{(n)} = b_{i}^{(n)} + \sum_{k=1}^{M}(W_{ik}^{(n)}*X_k^{(n-1)})
+z_{ij}^{(n)} = b_{i}^{(n)} + \sum_{k=1}^{M}(W_{ik}^{(n)}*a_k^{(n-1)})
 ```
 Activation function of every neuron in the neural network is sigmoid, where a<sub>i</sub> is that activation value and z<sub>i</sub> is the sum value of i neuron
 **Sigmoid**
