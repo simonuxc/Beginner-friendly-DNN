@@ -110,7 +110,7 @@ We get:
 ```math
 \frac{\partial{C}}{\partial{{z_i^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)}) * \sum_{k=1}^{M}\frac{\partial{C}}{\partial{z_k^{(n+1)}}} * W_{ji}^{(n+1)}
 ```
-Notice how for the cost derivative with respect to sum in layer _n_ we have to use cost derivative with respect to sum in layer _(n+1)_. That's the tricky part - saving the derivatives. 
+Notice how for the cost derivative with respect to sum in layer _n_ we have to use the cost derivative with respect to sum in layer _(n+1)_. That's the most important part - saving the derivatives. 
 
 Also, note that the derivative in the output layer will be a little bit different:
 ```math
