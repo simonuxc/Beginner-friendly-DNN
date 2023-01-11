@@ -35,6 +35,7 @@ The cost function of whole neural network:
 C
 ```
 # Calculations
+## Sum, activation and cost functions for forward propoagation
 It is necessary to calculate the sum values _z_ of every neuron in every hidden layer.
 We use the formula as follows (_M_ - number of neurons in the previous layer):
 ```math
@@ -51,6 +52,7 @@ MSE (or _C_)is calculated as follows:
 ```math
 C = \frac{1}{2}*\sum_{k=1}^M(\hat{y_i} - y_i)^2
 ```
+## Derivatives of cost function to necessary variables - calculating gradient
 Now onto derivatives. In order to calculate gradient for each weight we have to calculate the partial derivative of cost with respect to that weight. Therefore, we want to find:
 ```math
 \frac{\partial{C}}{\partial{W_{ij}}^{(n)}}
@@ -60,7 +62,6 @@ When calculating for the last layer _n_, following chain rule we can expand that
 \frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}} * \frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}}  * \frac{\partial{z_{i}^{(n)}}}{\partial{{W_{(ij)}^{(n)}}}}
 ```
 In order to do that, let's first derive expressions for each derivative:
-## Derivation
 ```math
 \frac{\partial{C}}{\partial{\hat{y_i}}} = (
 ```
