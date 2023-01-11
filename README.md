@@ -57,10 +57,7 @@ Now onto derivatives. In order to calculate gradient for each weight we have to 
 ```
 When _n_ is the last layer, following chain rule we can expand that derivative to:
 ```math
-\frac{\partial{C}}{\partial{W_{ij}}^{(n)}} = \frac{\partial{C}}{\partial{\hat{y_i}}^{(n)}} * \frac{\partial{a_{i}}^{(n)}}{\partial{z_{i}}^{(n)}}
-```
-```math
- * \frac{\partial{z_{i}}^{(n)}}{\partial{{W_{ij}}^{(n)}}
+\frac{\partial{C}}{\partial{W_{ij}}^{(n)}} = \frac{\partial{C}}{\partial{\hat{y_i}}^{(n)}} * \frac{\partial{a_{i}}^{(n)}}{\partial{z_{i}}^{(n)}}  * \frac{\partial{z_{i}}^{(n)}}{\partial{{W_{(ij)}}^{(n)}}}
 ```
 In order to do that, let's first derive general expressions for:
 1. Partial derivative of cost function with respect to _z<sub>i</sub><sup>(n)</sup>_
