@@ -61,7 +61,6 @@ When _n_ is the last layer, following chain rule we can expand that derivative t
 ```
 ```math
 \frac{\partial{C.}}{\partial{\hat{y_i}}}
-\frac{\partial{\hat{y_i}}{\partial{z_{i}}^{(n)}}
 ```
 In order to do that, let's first derive expressions for each derivative:
 ## Derivation
