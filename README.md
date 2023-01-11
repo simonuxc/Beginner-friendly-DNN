@@ -59,11 +59,8 @@ When _n_ is the last layer, following chain rule we can expand that derivative t
 ```math
 \frac{\partial{C}}{\partial{W_{ij}}^{(n)}} = \frac{\partial{C}}{\partial{\hat{y_i}}^{(n)}} * \frac{\partial{\hat{y_i}}^{(n)}}{\partial{z_{i}}^{(n)}}  * \frac{\partial{z_{i}}^{(n)}}{\partial{{W_{(ij)}}^{(n)}}}
 ```
-In order to do that, let's first derive general expressions for:
-1. Partial derivative of cost function with respect to _z<sub>i</sub><sup>(n)</sup>_
-2. Partial derivative of _a<sub>i</sub><sup>(n)</sup>_ with the respect to _z<sub>i</sub><sup>(n)</sup>_
-3. Partial derivative of _z<sub>i</sub><sup>(n)</sup>_ with respect to _w<sub>ij</sub><sup>(n)</sup>_
-## Derivatiion
+In order to do that, let's first derive expressions for each derivative:
+## Derivation
 ```math
-\frac{\partial{C}}{\partial{z_i}^{(n)}}
+\frac{\partial{C}}{\partial{\hat{y_i}}^{(n)}} = 
 ```
