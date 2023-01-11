@@ -10,6 +10,10 @@ Weight notation, where (n) - layer number, i - neuron number, j - weight number:
 ```math
 W_{ij}^{(n)}
 ```
+Bias value, where (n) - layer number, i - neuron number:
+```math
+b_{i}^{(n)}
+```
 The sum value z of a neuron, where (n) - layer number, i - neuron number:
 ```math
 z_{i}^{(n)}
