@@ -49,5 +49,5 @@ a_i = \frac{1}{1 + e^{(-z_i)}}
 The cost function used here is slightly different from MSE (Mean Square Error). Instead of taking the mean of all square errors, we take 1/2. This is done in order for the derivative to be a bit simplier.
 MSE (or _C_)is calculated as follows:
 ```math
-C = \frac{1}{2}*\sum_{k=1}^M()
+C = \frac{1}{2}*\sum_{k=1}^M(\hat{y_i} - y_i)^2
 ```
