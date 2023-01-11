@@ -23,8 +23,8 @@ The activation value a of a neuron, where (n) - layer number, i - neuron number:
 a_{i}^{(n)}
 ```
 # Calculations
-The sum z for each neuron is calculated by sum formula.
-If we wish to calculate z<sub>ij</sub><sup>(n)</sup>, we use the sum formula:
+It is necessary to calculate the sum values z of every neuron in every hidden layer.
+We use the formula as follows:
 ```math
 z_{ij}^{(n)} = b_{i}^{(n)} + \sum_{k=1}^{M}(W_{ik}^{(n)}*X_k^{(n-1)})
 ```
