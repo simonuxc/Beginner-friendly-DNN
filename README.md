@@ -59,6 +59,9 @@ When _n_ is the last layer, following chain rule we can expand that derivative t
 ```math
 \frac{\partial{C}}{\partial{W_{ij}}^{(n)}} = \frac{\partial{C}}{\partial{\hat{y_i}} * \frac{\partial{\hat{y_i}}{\partial{z_{i}}^{(n)}}  * \frac{\partial{z_{i}}^{(n)}}{\partial{{W_{(ij)}}^{(n)}}}
 ```
+```math
+\frac{\partial{C}}{\partial{\hat{y_i}}
+```
 In order to do that, let's first derive expressions for each derivative:
 ## Derivation
 ```math
