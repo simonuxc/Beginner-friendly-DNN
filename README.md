@@ -4,9 +4,9 @@ A neural network written in Python to solve XOR problem.
 # Architecture
 Dimensions of this neural network can be changed dynamically. For XOR problem it is sufficcient to have 2 neurons in the input layer, 10 neurons in the hidden layer and 2 neurons in the output layer (classes '0' and '1'). Dimensions are adjusted by this line of code:
 ```
-NN_dimensions = [2, 10, 10, 2]
+NN_dimensions = [2, 10, 2]
 ```
-In this example number of iterations is fixed, the learning rate is fixed as well. My example should display the essence of neural networks with hidden layers, that is math.
+In this example number of iterations is fixed, the learning rate is fixed as well. This project was made with one purpose: delving into the essence of neural networks, that is, math.
 # Notations used in formulas for gradient calculation:
 
 Weight notation, where _(n)_ - layer index, _i_ - neuron index, _j_ - weight index:
@@ -38,16 +38,17 @@ The cost function of whole neural network:
 C
 ```
 # Calculations
-## Sum, activation and cost functions for forward propoagation
-It is necessary to calculate the sum values _z_ of every neuron in every hidden layer.
+## Sum, activation and cost functions for forward propagation
+It is necessary to calculate the sum values _z_ for every neuron in every hidden layer.
 We use the formula as follows (_M_ - number of neurons in the previous layer):
 ```math
 z_{i}^{(n)} = b_{i}^{(n)} + \sum_{k=1}^{M}(W_{ik}^{(n)}*a_k^{(n-1)})
 ```
+
 Activation function of every neuron in this neural network is sigmoid.
 It is calculated as follows:
 ```math
-a_i = \frac{1}{1 + e^{(-z_i)}}
+a_i^{(n)} = \frac{1}{1 + e^{(-z_i^{(n)})}}
 ```
 
 The cost function used here is slightly different from MSE (Mean Square Error). Instead of taking the mean of all square errors, we take 1/2. This is done in order for the derivative to be a bit simplier.
@@ -64,19 +65,19 @@ If we are calculating for the last layer _n_, by following chain, previous deriv
 ```math
 \frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}} * \frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}}  * \frac{\partial{z_{i}^{(n)}}}{\partial{{W_{(ij)}^{(n)}}}}
 ```
-In order to do that, let's first find each derivative:
+In order to solve it, let's first find each derivative:
 ```math
 \frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}} = y_i - \hat{y_i}
 ```
 ```math
-\frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}} = \hat{y_i} * (1 - \hat{y_i})
+\frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}} = \hat{y_i} * (1 - \hat{y_i})\quad\quad also \quad\quad\frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)})
 ```
 ```math
 \frac{\partial{z_{i}^{(n)}}}{\partial{{W_{(ij)}^{(n)}}}} = a_j^{(n-1)}
 ```
 Putting it all back together, we get the full gradient:
 ```math
-grad = \frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = (y_i - \hat{y_i}) * (\hat{y_i} * (1 - \hat{y_i})) * a_j^{(n-1)}
+grad = \frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = (y_i - \hat{y_i}) * \hat{y_i} * (1 - \hat{y_i}) * a_j^{(n-1)}
 ```
 If we want to adjust the bias, then the partial derivative of sum with respect to bias is 1; we get:
 ```math
@@ -99,22 +100,24 @@ We get:
 \frac{\partial{C}}{\partial{{z_i^{(n)}}}} = \frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} * \sum_{k=1}^{M}\frac{\partial{C}}{\partial{z_k^{(n+1)}}} * \frac{\partial{z_k^{(n+1)}}}{\partial{{a_i^{(n)}}}}
 ```
 ```math
-\frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)})
-```
-```math
-\frac{\partial{z_k^{(n+1)}}}{\partial{{a_i^{(n)}}}} = W_{ji}^{(n+1)}
+\frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)})\quad\quad and \quad\quad\frac{\partial{z_k^{(n+1)}}}{\partial{{a_i^{(n)}}}} = W_{ji}^{(n+1)}
 ```
 ```math
 \frac{\partial{C}}{\partial{{z_i^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)}) * \sum_{k=1}^{M}\frac{\partial{C}}{\partial{z_k^{(n+1)}}} * W_{ji}^{(n+1)}
 ```
-Notice how for the cost derivative with respect to sum in layer n we have to use cost derivative with respect to sum in layer (n+1). That's the tricky part - saving the derivatives. If we go back to derivative in the last (output) layer we see, that we have calculated full gradient for each weight. But from the general formula we also see, that only cost derivative with respect to sum is needed.
+Notice how for the cost derivative with respect to sum in layer _n_ we have to use cost derivative with respect to sum in layer _(n+1)_. That's the tricky part - saving the derivatives. 
+
+Also note that derivative in the output layer will be a little bit different:
 ```math
 \frac{\partial{C}}{\partial{{z_{i}^{(n)}}}} = \frac{\partial{C}}{\partial{\hat{y_i}^{(n)}}}  * \frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n)}}}}
 ```
 ```math
 \frac{\partial{C}}{\partial{{z_{i}^{(n)}}}} = (y_i - \hat{y_i}) * \hat{y_i} * (1 - \hat{y_i})
 ```
-Now we have everything we need for our gradient descent algorithm. In the code, we have to save these derivatives in an array. Once they are calculated, weights can be adjusted by this final formula (note, that derivative for the output layer has to be calculated separately, but all others follow the same convention):
+Now we have everything we need for adjusting weights, so the general formula goes as this:
 ```math
-\frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{{z_{i}^{(n)}}}} * a_j^{(n-1)}
+grad = \frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{{z_{i}^{(n)}}}} * a_j^{(n-1)}
+```
+```math
+W_{ij}^{(n)} := W_{ij}^{(n)} - grad * learningRate
 ```
