@@ -88,5 +88,5 @@ W_{ij}^{(n)} := W_{ij}^{(n)} - grad * learningRate
 ```
 Now the harder part is calculating the gradient for hidden layers. Luckily, there is a pattern: derivatives repeat themselves, hence calculating and saving derivatives as we move from the outer layer (BACK propagation) to 'front' enables us to reuse the values.
 ```math
-\frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{\hat{y_i}^{(n+1)}}} * \frac{\partial{\hat{y_i}^{(n)}}}{\partial{{z_{i}^{(n+1)}}}} * \frac{\partial{z_{i}^{(n+1)}}}{\partial{{a_i^{(n)}}}} * \frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} 
+\frac{\partial{C}}{\partial{{z_{i}^{(n)}}} = \sum_{k=1}^{M} \frac{\partial{C}}{\partial{\hat{y_k}^{(n+1)}}} * \frac{\partial{a_k^{(n)}}}{\partial{a_k^{(n+1)}}} * \frac{\partial{a_k^{(n+1)}}}{\partial{{a_i^{(n)}}}} * \frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} 
 ```
