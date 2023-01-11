@@ -55,3 +55,4 @@ Now onto derivatives. In order to calculate gradient for each weight we have to 
 1. Partial derivative of cost function with respect to _z<sub>i</sub>_ in the last layer
 2. Partial derivative of _a<sub>i</sub><sup>(n)</sup>_ with the respect to _z<sub>i</sub><sup>(n)</sup>_
 3. Partial derivative of _z<sub>i</sub><sup>(n)</sup>_ with respect to _w<sub>ij</sub><sup>(n)</sup>_
+## Derivatives
