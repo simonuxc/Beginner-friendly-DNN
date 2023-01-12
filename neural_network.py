@@ -32,7 +32,10 @@ def calculate_activations(neurons_activations, x_set, weights):
 
 # returns square error based on the predicted outputs
 def se(y_hat, y_train):
-    return (y_train[0] - y_hat[0])**2 + (y_train[1] - y_hat[1])**2
+    sum = 0
+    for i in range(len(y_hat)):
+        sum += (y_train[i] - y_hat[i])**2
+    return sum
 
 # training data
 x_train = [[0, 0], [1, 0], [0, 1], [1, 1]]
@@ -41,7 +44,7 @@ y_train = [[1, 0], [0, 1], [0, 1], [1, 0]]
 NN_dimensions = [2, 10, 2]
 iterations = 10000
 learning_rate = 0.1
-# prepare square errors array for each training scenario
+# prepare square errors array array for each training scenario
 se_arr = []
 for i in range(len(x_train)): se_arr.append([])
 
@@ -52,19 +55,20 @@ for i in range(len(NN_dimensions)):
     for j in range(NN_dimensions[i]):
         neurons_activations[i].append(0)
 
-# create an array for keeping neuron weights. The '0' (input) layer doesn't have weights. Weights[i][j][k]: i - layer, j - neuron, k - weight
+# create an array for keeping neuron weights. The '0' (input) layer doesn't have weights. Weights[i][j][k]: i - hidden layer, j - neuron, k - weight
 neurons_weights = []
-# i is the number of layer
+# i is the index of layer
 for i in range(len(NN_dimensions) - 1):
     neurons_weights.append([])
     # j is the amount of neurons each layer has
     for j in range(NN_dimensions[i + 1]):
         neurons_weights[i].append([])
-        # k is the number of weight (the number of neurons in the previous layer) + 1 bias
+        # k is the index of weight (the number of neurons in the previous layer) + 1 bias
         for k in range(NN_dimensions[i] + 1):
             neurons_weights[i][j].append(random.random() - 0.5)
 
 # create an array for keeping derivatives of neurons (dcdz, where z is the sum of current layer)
+# note: neurons_activations array has one more 'layer' for the inputs, while derivatives and weights arrays are only for hidden layers
 derivatives_dcdz = []
 # the first layer doesn't need derivative to be calculated, because it has no weights (nothing to adjust)
 for i in range(len(NN_dimensions) - 1):
@@ -72,6 +76,7 @@ for i in range(len(NN_dimensions) - 1):
     for j in range(NN_dimensions[i + 1]):
         derivatives_dcdz[i].append(0)
 
+# training process
 for itr in range(iterations):
     # track training progress
     if itr % (iterations / 20) == 0:
@@ -98,7 +103,7 @@ for itr in range(iterations):
         for i in range(len(derivatives_dcdz) - 2, -1, - 1):
             # go through each of its 'neuron' derivative
             for j in range(len(derivatives_dcdz[i])):
-                # calculate part of that derivative using derivative formula (sum of derivatives in the following layer * respective weights)
+                # calculate part of that derivative using derivative formula (summation of derivatives in the following layer * respective weights)
                 for k in range(len(derivatives_dcdz[i + 1])):
                     derivatives_dcdz[i][j] += derivatives_dcdz[i + 1][k] * neurons_weights[i + 1][k][j]
             # go through each derivative in layer i and 'complete' it (formula)
@@ -117,18 +122,22 @@ for itr in range(iterations):
                     if k == 0:
                         # in the sum formula bias is multiplied by '1', so the full gradient is just dcdz
                         grad = derivatives_dcdz[i][j] * 1
-                        neurons_weights[i][j][k] -= grad * learning_rate
                     # adjust all other weights
                     else:
                         # in the sum formula wieght is multiplied by the ouput of prievious layer
                         grad = derivatives_dcdz[i][j] * neurons_activations[i][k - 1]
-                        neurons_weights[i][j][k] -= grad * learning_rate
+                    neurons_weights[i][j][k] -= grad * learning_rate
 
 for i in range(len(x_train)):
     y_hat = calculate_activations(neurons_activations, x_train[i], neurons_weights)
+    # outputing results
     print("Test data:        ", x_train[i])
     print("Expected results: ", y_train[i])
     print("Predicted results:", y_hat)
     print()
+    # graph parameters
     plt.plot(se_arr[i])
+    plt.title('Minimization of square error, scenario {}'.format(i))
+    plt.xlabel('Iterations')
+    plt.ylabel('Square error')
     plt.show()
