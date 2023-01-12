@@ -97,7 +97,7 @@ Now the harder part is calculating the gradient for hidden layers. Luckily, ther
 ```math
 \frac{\partial{C}}{\partial{{z_i^{(n)}}}} = \sum_{k=1}^{M}\frac{\partial{C}}{\partial{a_k^{(n+1)}}} * \frac{\partial{a_k^{(n + 1)}}}{\partial{z_k^{(n+1)}}} * \frac{\partial{z_k^{(n+1)}}}{\partial{{a_i^{(n)}}}} * \frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} 
 ```
-Note how the last derivative is constant in terms of _k_ (that value is the same for every member in the summation), so we can put it before the summation sign. Also note, that we have two partial derivatives that can be rewritten into one:
+Note how the last derivative is constant in terms of _k_ (that value is the same for every member in the summation), so we can put it before the summation sign. Also note, that we have two partial derivatives that can be rewritten as one:
 ```math
 \frac{\partial{C}}{\partial{a_k^{(n+1)}}} * \frac{\partial{a_k^{(n + 1)}}}{\partial{z_k^{(n+1)}}} = \frac{\partial{C}}{\partial{z_k^{(n+1)}}}
 ```
@@ -109,7 +109,7 @@ Caclulate derivatives that we can find:
 ```math
 \frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)})\quad\quad and \quad\quad\frac{\partial{z_k^{(n+1)}}}{\partial{{a_i^{(n)}}}} = W_{ji}^{(n+1)}
 ```
-Put the values back into equation:
+Plug the values back into equation:
 ```math
 \frac{\partial{C}}{\partial{{z_i^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)}) * \sum_{k=1}^{M}\frac{\partial{C}}{\partial{z_k^{(n+1)}}} * W_{ji}^{(n+1)}
 ```
