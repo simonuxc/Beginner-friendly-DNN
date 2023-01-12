@@ -43,7 +43,7 @@ The cost function of the whole neural network:
 C
 ```
 # Calculations
-The learning process is, in simple words, many repetitions of "moving" forward and calculating activation values, then going backward and adjusting weights and biases based on that. For the forward propagation we use functions of _weighted sum_, _activation_ and _square error_. For backpropagation we have to find derivatives of _square error_ with respect to _activation_, then derivative of _activation_ with respect to _weighted sum_ and lastly derivative of _weighted sum_ with respect to _weight_
+The learning process is, in simple words, many repetitions of "moving" forward and calculating activation values, then going backward and adjusting weights and biases based on that. For the forward propagation we use functions of _weighted sum_, _activation_ and _square error_. For backpropagation we have to find derivatives of _square error_ with respect to _activation_, then derivative of _activation_ with respect to _weighted sum_ and lastly derivative of _weighted sum_ with respect to _weight_.
 ## Sum, activation, and cost functions for forward propagation
 As mentioned before, it is necessary to calculate the _sum_ values _z_ for every neuron in every hidden layer.
 We use the formula as follows (_M_ - number of neurons in the previous layer):
@@ -62,7 +62,7 @@ MSE (or _C_) is calculated as follows:
 ```math
 C = \frac{1}{2}*\sum_{k=1}^M(y_i - \hat{y_i})^2
 ```
-## Derivatives and gradient for backpropagation
+## Derivatives and gradient - backpropagation
 Now onto derivatives. In order to calculate the gradient for each weight we have to calculate the partial derivative of cost with respect to that weight. Therefore, we want to find:
 ```math
 \frac{\partial{C}}{\partial{W_{ij}}^{(n)}}
