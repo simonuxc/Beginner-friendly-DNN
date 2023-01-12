@@ -65,7 +65,7 @@ C = \frac{1}{2}*\sum_{k=1}^M(y_i - \hat{y_i})^2
 ## Derivatives and gradient - backpropagation
 Now onto derivatives. In order to calculate the gradient for each weight we have to calculate the partial derivative of cost with respect to that weight. Therefore, we want to find:
 ```math
-\frac{\partial{C}}{\partial{W_{ij}}^{(n)}}
+grad = \frac{\partial{C}}{\partial{W_{ij}}^{(n)}}
 ```
 If we are calculating for the last layer _n_, by following the chain rule, the previous derivative can be expanded to the following equation:
 ```math
@@ -107,11 +107,11 @@ We get:
 ```
 Caclulate derivatives that we can find:
 ```math
-\frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)})\quad\quad and \quad\quad\frac{\partial{z_k^{(n+1)}}}{\partial{{a_i^{(n)}}}} = W_{ji}^{(n+1)}
+\frac{\partial{a_i^{(n)}}}{\partial{{z_{i}^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)})\quad\quad and \quad\quad\frac{\partial{z_k^{(n+1)}}}{\partial{{a_i^{(n)}}}} = W_{ki}^{(n+1)}
 ```
 Plug the values back into equation:
 ```math
-\frac{\partial{C}}{\partial{{z_i^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)}) * \sum_{k=1}^{M}\frac{\partial{C}}{\partial{z_k^{(n+1)}}} * W_{ji}^{(n+1)}
+\frac{\partial{C}}{\partial{{z_i^{(n)}}}} = a_i^{(n)} * (1 - a_i^{(n)}) * \sum_{k=1}^{M}\frac{\partial{C}}{\partial{z_k^{(n+1)}}} * W_{ki}^{(n+1)}
 ```
 Notice how for the cost derivative with respect to _sum_ in layer _n_ we have to use the cost derivative with respect to _sum_ in layer _(n+1)_. That's the most important part in making the code work - saving the derivatives. 
 
