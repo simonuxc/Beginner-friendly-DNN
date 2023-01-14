@@ -160,13 +160,13 @@ The general expression for any hidden layer:
 ### General expressions for finding gradients
 Once we have calculated all derivatives, we can adjust the weights by calculating the full gradient and subtracting it from that weight. Here we have two general formulas. First one for adjusting any weight:
 ```math
-grad_{ij}^{(n)} = \frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{z_{i}^{(n)}}} * \frac{\partial{z_{i}^{(n)}}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{{z_{i}^{(n)}}}} * a_j^{(n-1)}
+grad = \frac{\partial{C}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{z_{i}^{(n)}}} * \frac{\partial{z_{i}^{(n)}}}{\partial{W_{ij}^{(n)}}} = \frac{\partial{C}}{\partial{{z_{i}^{(n)}}}} * a_j^{(n-1)}
 ```
 And a second one for adjusting the _bias_ value (optionally: add _a<sub>0</sub> = 1_ to your activations array and use the previous formula):
 ```math
-grad_{ij}^{(n)} = \frac{\partial{C}}{\partial{b_i^{(n)}}} = \frac{\partial{C}}{\partial{z_{i}^{(n)}}} * 1 = \frac{\partial{C}}{\partial{z_{i}^{(n)}}}
+grad = \frac{\partial{C}}{\partial{b_i^{(n)}}} = \frac{\partial{C}}{\partial{z_{i}^{(n)}}} * 1 = \frac{\partial{C}}{\partial{z_{i}^{(n)}}}
 ```
-Finally, we get a really neat and clean _weight_ adjustment equation:
+Finally, we get a really neat and clean _weight_ (accordingly _bias_) adjustment equation:
 ```math
-W_{ij}^{(n)} := W_{ij}^{(n)} - grad_{ij}^{(n)} * learningRate
+W_{ij}^{(n)} := W_{ij}^{(n)} - grad * learningRate
 ```
